@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def list_users():
     users = []
     with open("/etc/passwd", "r") as f:
@@ -17,5 +16,23 @@ def list_users():
 
 
 
+
+
+def add_user(username):
+    os.system(f"adduser {username}")
+
+def change_password(username):
+    os.system(f"passwd {username}")
+
+def add_to_group(username, groupname):
+    os.system(f"usermod =aG {groupname} {username}")
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
-    print (list_users())
+    change_password("banana")
