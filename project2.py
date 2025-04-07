@@ -27,6 +27,12 @@ def change_password(username):
 def add_to_group(username, groupname):
     os.system(f"usermod =aG {groupname} {username}")
 
+def user_delete(username):
+    confirm = input(f"Are you sure you want to delete {username}? (y/n): ")
+    if confirm.lower == "y":
+        os.system(f"userdel {username}")
+    else:
+        print ("User not deleted")
 
 
 
