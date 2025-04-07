@@ -4,12 +4,12 @@
 import os
 import sys
 
-def list_users():        
+def list_users():
     "Returns all user accounts from the /etc/passwd file"   
-    users = []  #initialize emtpy list to store usernames 
-    with open("/etc/passwd", "r") as f: #opens and reads passwd file 
+    users = []  #initialize emtpy list to store usernames
+    with open("/etc/passwd", "r") as f: #opens and reads passwd file
         for line in f: #iterate through each line in file
-            parts = line.split(":") #split line using : delimteter 
+            parts = line.split(":") #split line using : delimteter
             username = parts[0] #username is the first field
             uid = int(parts[2])  #UID is the 3rd field
             if uid >= 1000 and uid != 65534: #filter out non user accounts and "nobody" account
@@ -47,19 +47,19 @@ def menu():
         print("4. List Users")
         print("5. Add to Group")
         print("6. Exit")
-        choice = input("Enter your choice(Number): ")   #retrieve user input 
+        choice = input("Enter your choice(Number): ")   #retrieve user input
 
         if choice == "1":
             username = input("Enter new username: ")
             add_user(username)
         elif choice == "2":
             users = list_users() #retrieves list of users
-            index = 1   #initialize index for numbering 
+            index = 1   #initialize index for numbering
             for user in users: #loop through all the users
                 print(f"{index}. {user}")   #display username with a number
-                index += 1 #increment number by 1 
-            user_index = int(input("Select user number to delete: ")) -1 #retrieve user selection  
-            if 0 <= user_index < len(users): #validate that the selection is valid 
+                index += 1 #increment number by 1
+            user_index = int(input("Select user number to delete: ")) -1 #retrieve user selection
+            if 0 <= user_index < len(users): #validate that the selection is valid
                 user_delete(users[user_index]) #calls function
         elif choice == "3":
             users = list_users()
@@ -67,7 +67,7 @@ def menu():
             for user in users:
                 print(f"{index}. {user}")
                 index += 1
-            user_index = int(input("Select number to reset password: ")) -1 
+            user_index = int(input("Select number to reset password: ")) -1
             if 0 <= user_index < len(users):
                 change_password(users[user_index])
         elif choice == "4":
@@ -79,13 +79,14 @@ def menu():
                 index += 1
         elif choice == "5":
             users = list_users()
-            index = 1 
+            index = 1
             for user in users:
                 print(f"{index}. {user}")
                 index += 1
-            user_index = int(input("Select number to add to group: ")) -1 
+            user_index = int(input("Select number to add to group: ")) -1
             if 0 <= user_index < len(users):
-                groupname = input("Which group would you like to add the user to?: ")   #second selection that asks user to input group name
+                groupname = input("Which group would you like to add the user to?: ")
+                #second selection that asks user to input group name
                 add_to_group(users[user_index], groupname)
         elif choice == "6":
             print("Goodbye")
@@ -96,4 +97,3 @@ def menu():
 
 if __name__ == "__main__":
     menu()
-
